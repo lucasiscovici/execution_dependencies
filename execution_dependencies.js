@@ -127,12 +127,7 @@ define([
                             console.log('[execution_dependencies] executing dependency cells in order ', processing_order ,'...');
                             var dependency_cells = processing_order.map(id =>cell_map[id]);                    // ...get dependent cells by their id
                           console.log("Execute cells..", dependency_cells)
-                            for( const cells of dependency_cells){
-                                for( const cell of cells){
-                                    orig_execute.call(cell, stop_on_error)
-                                }
-                            } 
-                                 // ...execute all dependent cells in sequence using the original execute method
+                            // dependency_cells.forEach(cells => cells.map(cell=>orig_execute.call(cell, stop_on_error)));          // ...execute all dependent cells in sequence using the original execute method
                         }
                     }
                 }
