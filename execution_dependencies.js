@@ -11,9 +11,6 @@
  *
  *
  */
- const  wait  =(ms) => {
-  return new Promise(resolve => setTimeout(() => resolve(), ms));
-}
 define([
     'jquery',
     'base/js/dialog',
@@ -130,11 +127,12 @@ define([
                             console.log('[execution_dependencies] executing dependency cells in order ', processing_order ,'...');
                             var dependency_cells = processing_order.map(id =>cell_map[id]);                    // ...get dependent cells by their id
                           console.log("Execute cells..", dependency_cells)
-                            dependency_cells.forEach(cells => cells.forEach(async (cell)=>
-                            {
-                            await orig_execute.call(cell, stop_on_error)
-                            await wait(300);
-                            }));          // ...execute all dependent cells in sequence using the original execute method
+                            for( const cells of dependency_cells){
+                                for( const cell of cells){
+                                    orig_execute.call(cell, stop_on_error)
+                                }
+                            } 
+                                 // ...execute all dependent cells in sequence using the original execute method
                         }
                     }
                 }
