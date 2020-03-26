@@ -59,7 +59,8 @@ define([
                         
                         cell_ids.forEach(function (id) {
                           //console.log('ID:', id, 'deps: ', dep_ids.toString())
-                            cell_map[id] = id in cell_map ? cell_map[id].push(cell) : [cell] ;
+                            if(id in cell_map)cell_map[id].push(cell)
+                            else cell_map[id]=[cell] ;
                             dep_graph[id] = dep_ids;
 
                         });
