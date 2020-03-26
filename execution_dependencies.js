@@ -58,7 +58,7 @@ define([
                         var dep_ids = tags.filter(tag => /=>.*/.test(tag)).map(tag => tag.substring(2));       // ...get all dependencies and drop the =>
                         
                         cell_ids.forEach(function (id) {
-                          //console.log('ID:', id, 'deps: ', dep_ids.toString())
+                          console.log('ID:', id,"cells",cell_map[id], 'deps: ', dep_ids.toString())
                             if(id in cell_map)cell_map[id].push(cell)
                             else cell_map[id]=[cell] ;
                             dep_graph[id] = dep_ids;
@@ -126,7 +126,7 @@ define([
                             processing_order.pop()
                             console.log('[execution_dependencies] executing dependency cells in order ', processing_order ,'...');
                             var dependency_cells = processing_order.map(id =>cell_map[id]);                    // ...get dependent cells by their id
-                          //console.log("Execute cells..", dependency_cells)
+                          console.log("Execute cells..", dependency_cells)
                             dependency_cells.forEach(cells => cells.map(cell=>orig_execute.call(cell, stop_on_error)));          // ...execute all dependent cells in sequence using the original execute method
                         }
                     }
